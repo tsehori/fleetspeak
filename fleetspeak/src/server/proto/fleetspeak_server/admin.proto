@@ -80,6 +80,25 @@ message BlacklistClientRequest {
   bytes client_id = 1;
 }
 
+// TODO add support for Grafana annotations
+message GetMetricValuesRequest {
+  enum Endpoint {
+    GET = 0;
+    POST_SEARCH = 1;
+    POST_QUERY = 2;
+    // POST-ANNOTATIONS = 3;
+  }
+  Endpoint endpoint = 1;
+  string target = 2;
+  string type = 3;
+}
+
+// TODO add support for Grafana annotations
+message GetMetricValuesResponse {
+  repeated string targets = 1;
+  repeated double datapoints = 2;
+}
+
 service Admin {
   // CreateBroadcast creates a FS broadcast, potentially sending a message to
   // many machines in the fleet.
@@ -124,5 +143,8 @@ service Admin {
   // BlacklistClient marks a client_id as invalid, forcing all Fleetspeak
   // clients using it to rekey.
   rpc BlacklistClient (BlacklistClientRequest) returns (fleetspeak.EmptyMessage) {
+  }
+
+  rpc GetMetricValues (GetMetricValuesRequest) returns (GetMetricValuesResponse) {
   }
 }
