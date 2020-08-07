@@ -418,3 +418,10 @@ func timestampProto(nanos int64) *tspb.Timestamp {
 		Nanos:   int32(nanos % time.Second.Nanoseconds()),
 	}
 }
+
+func (d *Datastore) CheckConnection(ctx context.Context) error {
+	if err := d.db.Ping(); err != nil {
+		return err
+	}
+	return nil
+}
