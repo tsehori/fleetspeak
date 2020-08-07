@@ -189,10 +189,10 @@ func (d MonitoredDatastore) CheckConnection(ctx context.Context) error {
 	return err
 }
 
-func (d MonitoredDatastore) FetchDatabaseColumnNames(ctx context.Context, table string) ([]string, error) {
+func (d MonitoredDatastore) FetchTableColumnNames(ctx context.Context, table string) ([]string, error) {
 	s := ftime.Now()
-	res, err := d.D.FetchDatabaseColumnNames(ctx, table)
-	d.C.DatastoreOperation(s, ftime.Now(), "FetchDatabaseColumnNames", err)
+	res, err := d.D.FetchTableColumnNames(ctx, table)
+	d.C.DatastoreOperation(s, ftime.Now(), "FetchTableColumnNames", err)
 	return res, err
 }
 

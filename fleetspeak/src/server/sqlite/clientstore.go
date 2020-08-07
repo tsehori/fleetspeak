@@ -426,7 +426,7 @@ func (d *Datastore) CheckConnection(ctx context.Context) error {
 	return nil
 }
 
-func (d *Datastore) FetchDatabaseColumnNames(ctx context.Context, table string) ([]string, error) {
+func (d *Datastore) FetchTableColumnNames(ctx context.Context, table string) ([]string, error) {
 	d.l.Lock()
 	defer d.l.Unlock()
 	var columns []string

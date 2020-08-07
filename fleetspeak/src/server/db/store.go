@@ -236,7 +236,7 @@ type ClientStore interface {
 	CheckConnection(ctx context.Context) error
 
 	// Fetches the column names from the database.
-	FetchDatabaseColumnNames(ctx context.Context, table string) ([]string, error)
+	FetchTableColumnNames(ctx context.Context, table string) ([]string, error)
 }
 
 // Broadcast limits with special meaning.

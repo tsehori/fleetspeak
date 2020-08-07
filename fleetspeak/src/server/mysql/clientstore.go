@@ -421,7 +421,7 @@ func (d *Datastore) CheckConnection(ctx context.Context) error {
 	return nil
 }
 
-func (d *Datastore) FetchDatabaseColumnNames(ctx context.Context, table string) ([]string, error) {
+func (d *Datastore) FetchTableColumnNames(ctx context.Context, table string) ([]string, error) {
 	var columns []string
 	err := d.runInTx(ctx, true, func(tx *sql.Tx) error {
 		columns = nil
