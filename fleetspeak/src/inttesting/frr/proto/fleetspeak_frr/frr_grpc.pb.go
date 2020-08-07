@@ -4,7 +4,8 @@ package fleetspeak_frr
 
 import (
 	context "context"
-	fleetspeak "fleetspeak/src/common/proto/fleetspeak"
+
+	fleetspeak "github.com/google/fleetspeak/fleetspeak/src/common/proto/fleetspeak"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -77,7 +78,7 @@ func (c *masterClient) CreateHunt(ctx context.Context, in *CreateHuntRequest, op
 }
 
 // MasterServer is the server API for Master service.
-// All implementations must embed UnimplementedMasterServer
+// All implementations should embed UnimplementedMasterServer
 // for forward compatibility
 type MasterServer interface {
 	// RecordMessage records that a TrafficResponse message was received by
@@ -92,10 +93,9 @@ type MasterServer interface {
 	// CreateHunt initiates a hunt which sends the provided TrafficRequestData to
 	// every client, up to limit.
 	CreateHunt(context.Context, *CreateHuntRequest) (*CreateHuntResponse, error)
-	mustEmbedUnimplementedMasterServer()
 }
 
-// UnimplementedMasterServer must be embedded to have forward compatible implementations.
+// UnimplementedMasterServer should be embedded to have forward compatible implementations.
 type UnimplementedMasterServer struct {
 }
 
@@ -111,7 +111,6 @@ func (*UnimplementedMasterServer) CompletedRequests(context.Context, *CompletedR
 func (*UnimplementedMasterServer) CreateHunt(context.Context, *CreateHuntRequest) (*CreateHuntResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateHunt not implemented")
 }
-func (*UnimplementedMasterServer) mustEmbedUnimplementedMasterServer() {}
 
 func RegisterMasterServer(s *grpc.Server, srv MasterServer) {
 	s.RegisterService(&_Master_serviceDesc, srv)

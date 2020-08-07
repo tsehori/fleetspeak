@@ -249,3 +249,7 @@ func (s adminServer) BlacklistClient(ctx context.Context, req *spb.BlacklistClie
 	}
 	return &fspb.EmptyMessage{}, nil
 }
+
+func (s adminServer) GetMetricValues(ctx context.Context, req *spb.GetMetricValuesRequest) (*spb.GetMetricValuesResponse, error) {
+	return nil, nil
+}

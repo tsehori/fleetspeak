@@ -156,7 +156,7 @@ func (c *adminClient) GetMetricValues(ctx context.Context, in *GetMetricValuesRe
 }
 
 // AdminServer is the server API for Admin service.
-// All implementations must embed UnimplementedAdminServer
+// All implementations should embed UnimplementedAdminServer
 // for forward compatibility
 type AdminServer interface {
 	// CreateBroadcast creates a FS broadcast, potentially sending a message to
@@ -185,10 +185,9 @@ type AdminServer interface {
 	// clients using it to rekey.
 	BlacklistClient(context.Context, *BlacklistClientRequest) (*fleetspeak.EmptyMessage, error)
 	GetMetricValues(context.Context, *GetMetricValuesRequest) (*GetMetricValuesResponse, error)
-	mustEmbedUnimplementedAdminServer()
 }
 
-// UnimplementedAdminServer must be embedded to have forward compatible implementations.
+// UnimplementedAdminServer should be embedded to have forward compatible implementations.
 type UnimplementedAdminServer struct {
 }
 
@@ -225,7 +224,6 @@ func (*UnimplementedAdminServer) BlacklistClient(context.Context, *BlacklistClie
 func (*UnimplementedAdminServer) GetMetricValues(context.Context, *GetMetricValuesRequest) (*GetMetricValuesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetMetricValues not implemented")
 }
-func (*UnimplementedAdminServer) mustEmbedUnimplementedAdminServer() {}
 
 func RegisterAdminServer(s *grpc.Server, srv AdminServer) {
 	s.RegisterService(&_Admin_serviceDesc, srv)
