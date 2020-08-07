@@ -145,6 +145,7 @@ service Admin {
   rpc BlacklistClient (BlacklistClientRequest) returns (fleetspeak.EmptyMessage) {
   }
 
+  // GetMetricValues retrieves metric values from database.
   rpc GetMetricValues (GetMetricValuesRequest) returns (GetMetricValuesResponse) {
   }
 }

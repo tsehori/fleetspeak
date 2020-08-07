@@ -6,7 +6,6 @@ import (
 	context "context"
 
 	fleetspeak "github.com/google/fleetspeak/fleetspeak/src/common/proto/fleetspeak"
-
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -45,6 +44,7 @@ type AdminClient interface {
 	// BlacklistClient marks a client_id as invalid, forcing all Fleetspeak
 	// clients using it to rekey.
 	BlacklistClient(ctx context.Context, in *BlacklistClientRequest, opts ...grpc.CallOption) (*fleetspeak.EmptyMessage, error)
+	// GetMetricValues retrieves metric values from database.
 	GetMetricValues(ctx context.Context, in *GetMetricValuesRequest, opts ...grpc.CallOption) (*GetMetricValuesResponse, error)
 }
 
@@ -184,6 +184,7 @@ type AdminServer interface {
 	// BlacklistClient marks a client_id as invalid, forcing all Fleetspeak
 	// clients using it to rekey.
 	BlacklistClient(context.Context, *BlacklistClientRequest) (*fleetspeak.EmptyMessage, error)
+	// GetMetricValues retrieves metric values from database.
 	GetMetricValues(context.Context, *GetMetricValuesRequest) (*GetMetricValuesResponse, error)
 }
 
