@@ -183,11 +183,17 @@ func (d MonitoredDatastore) FetchResourceUsageRecords(ctx context.Context, id co
 }
 
 func (d MonitoredDatastore) CheckConnection(ctx context.Context) error {
-	return nil
+	s := ftime.Now()
+	err := d.D.CheckConnection(ctx)
+	d.C.DatastoreOperation(s, ftime.Now(), "CheckConnection", err)
+	return err
 }
 
 func (d MonitoredDatastore) FetchDatabaseColumnNames(ctx context.Context, table string) ([]string, error) {
-	return nil, nil
+	s := ftime.Now()
+	res, err := d.D.FetchDatabaseColumnNames(ctx, table)
+	d.C.DatastoreOperation(s, ftime.Now(), "FetchDatabaseColumnNames", err)
+	return res, err
 }
 
 func (d MonitoredDatastore) LinkMessagesToContact(ctx context.Context, contact db.ContactID, msgs []common.MessageID) error {
