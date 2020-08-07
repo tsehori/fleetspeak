@@ -182,6 +182,14 @@ func (d MonitoredDatastore) FetchResourceUsageRecords(ctx context.Context, id co
 	return res, err
 }
 
+func (d MonitoredDatastore) CheckConnection(ctx context.Context) error {
+	return nil
+}
+
+func (d MonitoredDatastore) FetchDatabaseColumnNames(ctx context.Context, table string) ([]string, error) {
+	return nil, nil
+}
+
 func (d MonitoredDatastore) LinkMessagesToContact(ctx context.Context, contact db.ContactID, msgs []common.MessageID) error {
 	s := ftime.Now()
 	err := d.D.LinkMessagesToContact(ctx, contact, msgs)
