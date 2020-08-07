@@ -262,7 +262,7 @@ func (s adminServer) GetMetricValues(ctx context.Context, req *spb.GetMetricValu
 		return &spb.GetMetricValuesResponse{}, nil
 	case spb.GetMetricValuesRequest_POST_SEARCH:
 		// POST_SEARCH
-		columns, err := s.store.FetchTableColumnNames(ctx, "client_resource_usage_records")
+		columns, err := s.store.FetchTableColumnNames(ctx, "client_resource_usage_records") // todo make generic table
 		if err != nil {
 			return nil, err
 		}

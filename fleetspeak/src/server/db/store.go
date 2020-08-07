@@ -229,7 +229,7 @@ type ClientStore interface {
 	RecordResourceUsageData(ctx context.Context, id common.ClientID, rud mpb.ResourceUsageData) error
 
 	// Fetches at most 'limit' resource-usage records for a given client from the data-store.
-	// TODO: Add more complex queries.
+	// TODO: Add more complex queries. Once this is supported, can be combined with FetchResourceUsageDatapoints.
 	FetchResourceUsageRecords(ctx context.Context, id common.ClientID, limit int) ([]*spb.ClientResourceUsageRecord, error)
 
 	// Checks that the connection to the database is established.
