@@ -262,7 +262,13 @@ func (s adminServer) GetMetricValues(ctx context.Context, req *spb.GetMetricValu
 		return &spb.GetMetricValuesResponse{}, nil
 	case spb.GetMetricValuesRequest_POST_SEARCH:
 		// POST_SEARCH
-		return nil, nil
+		columns, err := s.store.FetchDatabaseColumnNames(ctx, "client_resource_usage_records")
+		if err != nil {
+			return nil, err
+		}
+		return &spb.GetMetricValuesResponse{
+			Targets: columns,
+		}, nil
 	case spb.GetMetricValuesRequest_POST_QUERY:
 		// POST_QUERY
 		return nil, nil
