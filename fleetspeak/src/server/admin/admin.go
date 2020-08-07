@@ -251,5 +251,16 @@ func (s adminServer) BlacklistClient(ctx context.Context, req *spb.BlacklistClie
 }
 
 func (s adminServer) GetMetricValues(ctx context.Context, req *spb.GetMetricValuesRequest) (*spb.GetMetricValuesResponse, error) {
-	return nil, nil
+	switch req.Endpoint {
+	case spb.GetMetricValuesRequest_GET:
+		// GET
+		return nil, nil
+	case spb.GetMetricValuesRequest_POST_SEARCH:
+		// POST_SEARCH
+		return nil, nil
+	case spb.GetMetricValuesRequest_POST_QUERY:
+		// POST_QUERY
+		return nil, nil
+	}
+	return nil, fmt.Errorf("request endpoint is not recognized or supported: %d", req.Endpoint)
 }
