@@ -420,3 +420,34 @@ func (d *Datastore) CheckConnection(ctx context.Context) error {
 	}
 	return nil
 }
+
+func (d *Datastore) FetchDatabaseColumnNames(ctx context.Context, table string) ([]string, error) {
+	var columns []string
+	err := d.runInTx(ctx, true, func(tx *sql.Tx) error {
+		columns = nil
+		rows, err := tx.QueryContext(
+			ctx,
+			"SHOW COLUMNS FROM client_resource_usage_records")
+
+		if err != nil {
+			return err
+		}
+
+		defer rows.Close()
+
+		for rows.Next() {
+			var column string
+			err := rows.Scan(column)
+			if err != nil {
+				return err
+			}
+			columns = append(columns, column)
+		}
+
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return columns, nil
+}
