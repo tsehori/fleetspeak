@@ -10,11 +10,10 @@ import (
 	reflect "reflect"
 	sync "sync"
 
-	fleetspeak "github.com/google/fleetspeak/fleetspeak/src/common/proto/fleetspeak"
-
 	proto "github.com/golang/protobuf/proto"
 	any "github.com/golang/protobuf/ptypes/any"
 	timestamp "github.com/golang/protobuf/ptypes/timestamp"
+	fleetspeak "github.com/google/fleetspeak/fleetspeak/src/common/proto/fleetspeak"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 )
