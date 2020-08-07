@@ -7,12 +7,14 @@
 package fleetspeak_grpcservice
 
 import (
-	fleetspeak "fleetspeak/src/common/proto/fleetspeak"
+	reflect "reflect"
+	sync "sync"
+
+	fleetspeak "github.com/google/fleetspeak/fleetspeak/src/common/proto/fleetspeak"
+
 	proto "github.com/golang/protobuf/proto"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
-	reflect "reflect"
-	sync "sync"
 )
 
 const (
