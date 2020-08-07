@@ -231,6 +231,9 @@ type ClientStore interface {
 	// Fetches at most 'limit' resource-usage records for a given client from the data-store.
 	// TODO: Add more complex queries.
 	FetchResourceUsageRecords(ctx context.Context, id common.ClientID, limit int) ([]*spb.ClientResourceUsageRecord, error)
+
+	// Checks that the connection to the database is established.
+	CheckConnection(ctx context.Context) error
 }
 
 // Broadcast limits with special meaning.

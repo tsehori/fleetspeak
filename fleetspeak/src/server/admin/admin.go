@@ -251,10 +251,15 @@ func (s adminServer) BlacklistClient(ctx context.Context, req *spb.BlacklistClie
 }
 
 func (s adminServer) GetMetricValues(ctx context.Context, req *spb.GetMetricValuesRequest) (*spb.GetMetricValuesResponse, error) {
+
 	switch req.Endpoint {
 	case spb.GetMetricValuesRequest_GET:
 		// GET
-		return nil, nil
+		err := s.store.CheckConnection(ctx)
+		if err != nil {
+			return nil, err
+		}
+		return &spb.GetMetricValuesResponse{}, nil
 	case spb.GetMetricValuesRequest_POST_SEARCH:
 		// POST_SEARCH
 		return nil, nil
