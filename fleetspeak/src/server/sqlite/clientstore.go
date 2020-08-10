@@ -460,5 +460,42 @@ func (d *Datastore) FetchTableColumnNames(ctx context.Context, table string) ([]
 }
 
 func (d *Datastore) FetchResourceUsageDatapoints(ctx context.Context, responseType, target string, id common.ClientID, limit int) (*spb.GetMetricValuesResponse, error) {
-	return nil, nil
+	var response *spb.GetMetricValuesResponse
+	response.Targets = []string{target} // Grafana supports 1 to N targets but we don't currently need it
+	var metrics []*spb.Metric
+	err := d.runInTx(func(tx *sql.Tx) error {
+		metrics = nil
+		rows, err := tx.QueryContext(
+			ctx,
+			"SELECT client_timestamp, ? FROM client_resource_usage_records WHERE client_id=? LIMIT ?",
+			target,
+			id.Bytes(),
+			limit)
+
+		if err != nil {
+			return err
+		}
+
+		defer rows.Close()
+
+		for rows.Next() {
+			metric := &spb.Metric{}
+			var clientTimestamp int64
+			err := rows.Scan(clientTimestamp, &metric.Datapoint)
+
+			if err != nil {
+				return err
+			}
+
+			metric.Timestamp = timestampProto(clientTimestamp)
+			metrics = append(metrics, metric)
+		}
+
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	response.Metrics = metrics
+	return response, nil
 }
