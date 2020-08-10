@@ -251,7 +251,6 @@ func (s adminServer) BlacklistClient(ctx context.Context, req *spb.BlacklistClie
 }
 
 func (s adminServer) GetMetricValues(ctx context.Context, req *spb.GetMetricValuesRequest) (*spb.GetMetricValuesResponse, error) {
-
 	switch req.Endpoint {
 	case spb.GetMetricValuesRequest_GET:
 		// GET
@@ -261,8 +260,7 @@ func (s adminServer) GetMetricValues(ctx context.Context, req *spb.GetMetricValu
 		}
 		return &spb.GetMetricValuesResponse{}, nil
 	case spb.GetMetricValuesRequest_POST_SEARCH:
-		// POST_SEARCH
-		columns, err := s.store.FetchTableColumnNames(ctx, "client_resource_usage_records") // todo make generic table
+		columns, err := s.store.FetchTableColumnNames(ctx, "client_resource_usage_records") // todo support generic table
 		if err != nil {
 			return nil, err
 		}
@@ -270,7 +268,6 @@ func (s adminServer) GetMetricValues(ctx context.Context, req *spb.GetMetricValu
 			Targets: columns,
 		}, nil
 	case spb.GetMetricValuesRequest_POST_QUERY:
-		// POST_QUERY
 		return nil, nil
 	}
 	return nil, fmt.Errorf("request endpoint is not recognized or supported: %d", req.Endpoint)
