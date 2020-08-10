@@ -97,7 +97,8 @@ message GetMetricValuesRequest {
 // TODO add support for Grafana annotations
 message GetMetricValuesResponse {
   repeated string targets = 1;
-  repeated double datapoints = 2;
+  repeated google.protobuf.Timestamp timestamps = 2;
+  repeated double datapoints = 3;
 }
 
 service Admin {

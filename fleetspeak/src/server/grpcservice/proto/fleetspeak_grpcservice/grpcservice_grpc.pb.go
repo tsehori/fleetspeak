@@ -6,7 +6,6 @@ import (
 	context "context"
 
 	fleetspeak "github.com/google/fleetspeak/fleetspeak/src/common/proto/fleetspeak"
-
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
