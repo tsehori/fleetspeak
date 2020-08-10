@@ -452,6 +452,6 @@ func (d *Datastore) FetchTableColumnNames(ctx context.Context, table string) ([]
 	return columns, nil
 }
 
-func (d *Datastore) FetchResourceUsageDatapoints(ctx context.Context, responseType, target string, id common.ClientID) (*spb.GetMetricValuesResponse, error) {
+func (d *Datastore) FetchResourceUsageDatapoints(ctx context.Context, responseType, target string, id common.ClientID, limit int) (*spb.GetMetricValuesResponse, error) {
 	return nil, nil
 }

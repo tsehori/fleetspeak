@@ -238,9 +238,9 @@ type ClientStore interface {
 	// Fetches the column names from the database.
 	FetchTableColumnNames(ctx context.Context, table string) ([]string, error)
 
-	// Fetches datapoints for given targets and client from the data-store.
+	// Fetches at most 'limit' datapoints for given targets and client from the data-store.
 	// TODO: Can be combined with FetchResourceUsageRecords once more complex queries are supported.
-	FetchResourceUsageDatapoints(ctx context.Context, responseType, target string, id common.ClientID) (*spb.GetMetricValuesResponse, error)
+	FetchResourceUsageDatapoints(ctx context.Context, responseType, target string, id common.ClientID, limit int) (*spb.GetMetricValuesResponse, error)
 }
 
 // Broadcast limits with special meaning.
