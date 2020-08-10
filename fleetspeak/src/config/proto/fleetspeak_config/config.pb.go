@@ -7,12 +7,11 @@
 package fleetspeak_config
 
 import (
-	fleetspeak_components "github.com/google/fleetspeak/fleetspeak/src/server/components/proto/fleetspeak_components"
-
 	reflect "reflect"
 	sync "sync"
 
 	proto "github.com/golang/protobuf/proto"
+	fleetspeak_components "github.com/google/fleetspeak/fleetspeak/src/server/components/proto/fleetspeak_components"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 )
