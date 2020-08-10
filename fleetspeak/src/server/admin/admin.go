@@ -272,7 +272,7 @@ func (s adminServer) GetMetricValues(ctx context.Context, req *spb.GetMetricValu
 		if err != nil {
 			return nil, fmt.Errorf("unable to parse id [%d]: %v", req.ClientId, err)
 		}
-		maxDataPoints := 100
+		maxDataPoints := 100 // TODO: change or take from somewhere else, currently arbitrary
 		res, err := s.store.FetchResourceUsageDatapoints(ctx, req.Target, req.ResponseType, id, maxDataPoints)
 		if err != nil {
 			return nil, err
