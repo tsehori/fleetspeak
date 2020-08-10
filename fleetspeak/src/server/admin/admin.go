@@ -268,7 +268,15 @@ func (s adminServer) GetMetricValues(ctx context.Context, req *spb.GetMetricValu
 			Targets: columns,
 		}, nil
 	case spb.GetMetricValuesRequest_POST_QUERY:
-		return nil, nil
+		id, err := common.BytesToClientID(req.ClientId)
+		if err != nil {
+			return nil, fmt.Errorf("unable to parse id [%d]: %v", req.ClientId, err)
+		}
+		res, err := s.store.FetchResourceUsageDatapoints(ctx, req.Target, req.ResponseType, id)
+		if err != nil {
+			return nil, err
+		}
+		return res, nil
 	}
 	return nil, fmt.Errorf("request endpoint is not recognized or supported: %d", req.Endpoint)
 }
