@@ -212,6 +212,15 @@ class OutgoingConnection(object):
       lambda t: self._stub.DeletePendingMessages(request, timeout=t)
     )
 
+  def GetMetricValues(self, request, timeout=None):
+    if not isinstance(request, admin_pb2.GetMetricValuesRequest):
+      raise TypeError("Expected fleetspeak.admin.GetMetricValuesRequest "
+        "as an argument.")
+
+    return self._RetryLoop(
+      lambda t: self._stub.DeletePendingMessages(request, timeout=t)
+    )
+
   def ListClients(self, request, timeout=None):
     """Provides basic information about Fleetspeak clients.
 
