@@ -240,7 +240,7 @@ type ClientStore interface {
 
 	// Fetches datapoints for given targets and client from the data-store.
 	// TODO: Can be combined with FetchResourceUsageRecords once more complex queries are supported.
-	FetchResourceUsageDatapoints(ctx context.Context, gmvr spb.GetMetricValuesRequest) ([]*spb.GetMetricValuesResponse, error)
+	FetchResourceUsageDatapoints(ctx context.Context, responseType, target string, id common.ClientID) (*spb.GetMetricValuesResponse, error)
 }
 
 // Broadcast limits with special meaning.

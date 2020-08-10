@@ -196,6 +196,13 @@ func (d MonitoredDatastore) FetchTableColumnNames(ctx context.Context, table str
 	return res, err
 }
 
+func (d MonitoredDatastore) FetchResourceUsageDatapoints(ctx context.Context, responseType, target string, id common.ClientID) (*spb.GetMetricValuesResponse, error) {
+	s := ftime.Now()
+	res, err := d.D.FetchResourceUsageDatapoints(ctx, responseType, target, id)
+	d.C.DatastoreOperation(s, ftime.Now(), "FetchResourceUsageDatapoints", err)
+	return res, err
+}
+
 func (d MonitoredDatastore) LinkMessagesToContact(ctx context.Context, contact db.ContactID, msgs []common.MessageID) error {
 	s := ftime.Now()
 	err := d.D.LinkMessagesToContact(ctx, contact, msgs)

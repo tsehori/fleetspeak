@@ -90,7 +90,8 @@ message GetMetricValuesRequest {
   }
   Endpoint endpoint = 1;
   string target = 2;
-  string type = 3;
+  string response_type = 3;
+  bytes client_id = 4;
 }
 
 // TODO add support for Grafana annotations
